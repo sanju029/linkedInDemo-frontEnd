@@ -1,0 +1,29 @@
+<div class="container">
+<form (ngSubmit)=addEducation() #f="ngForm">
+    <div class="form-group">
+    <label for="name"><span>College</span></label>
+    <input type="text" class="form-control" id="college" name="college"  [(ngModel)]="education.college" >
+    </div>
+    <div class="form-group">
+    <label for="name"><span>Joining Year</span></label>
+    <input type="text" class="form-control" id="joiningYear" name="joiningYear"  [(ngModel)]="education.joiningYear" >
+    </div>
+    <div class="form-group">
+        <label for="name"><span>Ending Year</span></label>
+        <input type="text" class="form-control" id="endingYear" name="endingYear"  [(ngModel)]="education.endingYear" >
+    </div>
+    <div class="form-group">
+        <label for="name"><span>Course</span></label>
+        <input type="text" class="form-control" id="course" name="course" [(ngModel)]="education.course" >
+    </div>
+    <div class="form-group">
+        <label for="name"><span>Grade</span></label>
+        <input type="text" class="form-control" id="grade" name="grade" [(ngModel)]="education.grade" >
+    </div>
+
+    <button type="submit" class="btn btn-default btn-sm" [>
+        <span class="glyphicon glyphicon-save"></span> Save
+    </button>
+
+</form>
+</div>

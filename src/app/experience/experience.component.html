@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="experience category">
+        <h2>
+            Experience
+            <span class="right">
+                <button type="button" class="btn btn-default btn-sm" (click)=" edit=!edit ">
+                    <span class="glyphicon glyphicon-edit"></span> Edit
+                </button>
+                  <button type="button" class="btn btn-default btn-sm" (click)="add=!add"> 
+                    <span class="glyphicon glyphicon-plus"></span> Add
+                  </button>
+            </span>
+        </h2>
+        <h4 *ngIf="experiences.length == 0">No Experiences added!</h4>
+    
+        <div class="inner" *ngFor="let experience of experiences; index">
+        <form (ngSubmit)=updateExperience() #f="ngForm">
+                <div class="form-group">
+                <label for="name"><span>Company</span></label>
+                <input type="text" class="form-control" id="company" name="college" [disabled]=edit [(ngModel)]="experience.company" >
+                </div>
+                <div class="form-group">
+                    <label for="name"><span>Role</span></label>
+                    <input type="text" class="form-control" id="role" name="role"  [disabled]=edit [(ngModel)]="experience.role" >
+                </div>
+                <div class="form-group">
+                <label for="name"><span>Joining Year</span></label>
+                <input type="text" class="form-control" id="joiningYear" name="joiningYear"  [disabled]=edit [(ngModel)]="experience.joiningYear" >
+                </div>
+                <div class="form-group">
+                    <label for="name"><span>Ending Year</span></label>
+                    <input type="text" class="form-control" id="endingYear" name="endingYear"  [disabled]=edit [(ngModel)]="experience.endingYear" >
+                </div>
+                
+    
+                <button type="submit" class="btn btn-default btn-sm" [disabled]=edit >
+                    <span class="glyphicon glyphicon-save"></span> Save
+                </button>
+    
+            </form>
+        </div>
+    </div>
+</div>

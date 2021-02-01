@@ -1,0 +1,34 @@
+<div class="container">
+<div class="skills category">
+    <h2>
+        Programming Skills
+        <span class="right">
+            <button type="button" class="btn btn-default btn-sm" (click)=" edit=!edit ">
+                <span class="glyphicon glyphicon-edit"></span> Edit
+            </button>
+              <button type="button" class="btn btn-default btn-sm" (click)="add=!add"> 
+                <span class="glyphicon glyphicon-plus"></span> Add
+              </button>
+        </span>
+    </h2>
+    <h4 *ngIf="skills.length == 0">No Skills added!</h4>
+
+    <div class="inner" *ngFor="let skill of skills; index">
+    <form (ngSubmit)=updateSkill() #f="ngForm">
+            <div class="form-group">
+            <label for="name"><span>Technology</span></label>
+            <input type="text" class="form-control" id="technology" name="technology" [disabled]=edit [(ngModel)]="skill.technology" >
+            </div>
+            <div class="form-group">
+            <label for="name"><span>Rating</span></label>
+            <input type="text" class="form-control" id="ratinb" name="rating"  [disabled]=edit [(ngModel)]="skill.rating" >
+            </div>
+            <button type="submit" class="btn btn-default btn-sm" [disabled]=edit >
+                <span class="glyphicon glyphicon-save"></span> Save
+            </button>
+
+        </form>
+    </div>
+</div>
+</div>
+    
