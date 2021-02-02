@@ -11,7 +11,7 @@
                   </button>
             </span>
         </h2>
-        <h4 *ngIf="experiences.length == 0">No Experiences added!</h4>
+        <!-- <h4 *ngIf="experiences.length == 0">No Experiences added!</h4> -->
     
         <div class="inner" *ngFor="let experience of experiences; index">
         <form (ngSubmit)=updateExperience() #f="ngForm">

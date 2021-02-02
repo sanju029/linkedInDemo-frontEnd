@@ -11,7 +11,7 @@
               </button>
         </span>
     </h2>
-    <h4 *ngIf="educations.length == 0">No Skills added!</h4>
+    <!-- <h4 *ngIf="educations.length == 0">No Skills added!</h4> -->
 
     <div class="inner" *ngFor="let education of educations; index">
     <form (ngSubmit)=updateEducation() #f="ngForm">

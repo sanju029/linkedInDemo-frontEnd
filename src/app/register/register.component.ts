@@ -53,6 +53,9 @@ export class RegisterComponent implements OnInit {
   gotoList() {
     this.router.navigate(['/users']);
   }
+  post(){
+    
+  }
 
 }
 // import {Component, OnInit, ViewChild} from '@angular/core';

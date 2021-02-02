@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Education } from './education';
+import { EducationService} from './education.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-education',
@@ -7,36 +9,30 @@ import { Education } from './education';
   styleUrls: ['./education.component.css']
 })
 export class EducationComponent implements OnInit {
-  educations: Array<Education> = [
-    {
-        college: "Sri Chaitanya",
-        duration: "2 years",
-        joiningYear: "may 2015",
-        endingYear: "june 2017",
-        course: "Intermediate",
-        grade: "8.5",
-    },
-    {
-        college: "Vasavi College of Engineering",
-        duration: "2 years",
-        joiningYear: "june 2017",
-        endingYear: "une 2021",
-        course: "Bachelor of Engineering",
-        grade: "8.52"
-    },
-];
+  educations: any;
+education: Education=new Education();
 
 edit : boolean=true;
 add : boolean=true;
+username: string="";
 
-  constructor() { }
+  constructor(private educationService: EducationService, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.username = this.activeRoute.snapshot.params.username;
+    console.log(this.username);
+    this.educationService.setUrl('http://localhost:8080/education/' + this.username);
+    this.educationService.get().subscribe(
+      (data) => {
+        console.log(data);
+        this.educations = data;
+      });
   }
   updateEducation(){
     
     //console.log(this.signupForm.value);
     //service update needed
   }
+
 
 }
