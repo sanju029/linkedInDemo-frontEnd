@@ -12,9 +12,7 @@ import { RegisterComponent } from './register/register.component';
 import { RegisterModule } from './register/register.module';
 import { ProfileModule } from './profile/profile/profile.module';
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,9 +25,7 @@ import { ProfileModule } from './profile/profile/profile.module';
     RegisterModule,
     ProfileModule,
   ],
-  providers: [
-    // {provide: ErrorHandler, useClass: GlobalErrorHandler}],
-  ],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

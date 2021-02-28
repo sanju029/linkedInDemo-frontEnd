@@ -30,7 +30,6 @@ export class ProfileComponent implements OnInit {
     private router: Router
   ) {}
 
-
   ngOnInit(): void {
     this.username = this.activeRoute.snapshot.params.username;
     this.profileService.setUrl('http://localhost:8080/user/' + this.username);
@@ -38,5 +37,10 @@ export class ProfileComponent implements OnInit {
       console.log(data);
       this.user = data;
     });
+  }
+
+  handleLogout(): void {
+    localStorage.clear();
+    this.router.navigateByUrl(``);
   }
 }

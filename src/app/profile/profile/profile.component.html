@@ -1,3 +1,13 @@
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div><a href="https://www.javaguides.net" class="navbar-brand">LinkedInDemo</a></div>
+        <ul class="navbar-nav navbar-collapse justify-content-end">
+            <li>
+                <a class="nav-link" href="/logout" (click)=handleLogout()>Logout</a>
+            </li>
+        </ul>
+    </nav>
+  </header>
 <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
   <div class="container">
     <div class="jumbotron">
@@ -5,9 +15,6 @@
         <h1 class="mb-0">
           {{ user.fullName }}
         </h1>
-        <!-- <h1 class="mb-0">
-          <span class="text-primary">{{ user.username }}</span>
-        </h1> -->
         <h3 class="mb-5">Software Developer</h3>
       </div>
     </div>

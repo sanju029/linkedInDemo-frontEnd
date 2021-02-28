@@ -1,25 +1,51 @@
-
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <section class="sample-app-content">
-          <h2>Log In</h2>
-          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <div>
-              <label>Username:</label>
-              <input type="text" placeholder="Enter User Name:" class="form-control" formControlName="username"/>
-            </div>
-            <p>
-              <label>Password:</label>
-              <input type="password" placeholder="Enter Password:" class="form-control" formControlName="password"/>
-            </p>
-            <p>
-              <button type="submit" class="btn btn-success" style="cursor: pointer"  [disabled]="!loginForm.valid">Submit</button>
-              <span> &nbsp;</span>
-              <button type="button" class="btn btn-primary"style="cursor: pointer" (click)="onRegister()">Register</button>
-            </p>
-          </form>
-        </section>
-      </div>
+<div class="container">
+  <h1 class="text-center display-1">Log In</h1>
+  <div class="card w-60" style="margin-left: 25%;margin-right: 25%;">
+    <div class="card-body">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="alert alert-warning" *ngIf="invalidLogin">
+          {{ errorMessage }}
+        </div>
+        <div class="form-group">
+          <label>Username:</label>
+          <input
+            type="text"
+            placeholder="Enter User Name:"
+            class="form-control"
+            formControlName="username"
+          />
+        </div>
+        <div>
+          <label>Password:</label>
+          <input
+            type="password"
+            placeholder="Enter Password:"
+            class="form-control"
+            formControlName="password"
+          />
+        </div>
+        <span>&nbsp;</span>
+        <div>
+          <button
+            type="submit"
+            class="btn btn-success"
+            style="cursor: pointer"
+            [disabled]="!loginForm.valid"
+          >
+            Submit
+          </button>
+          <span> &nbsp;</span>
+          <button
+            type="button"
+            class="btn btn-primary"
+            style="cursor: pointer"
+            (click)="onRegister()"
+          >
+            Register
+          </button>
+        </div>
+      </form>
+      <!-- </section> -->
     </div>
   </div>
+</div>
