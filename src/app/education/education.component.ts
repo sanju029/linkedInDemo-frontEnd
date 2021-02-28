@@ -1,38 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { Education } from './education';
 import { EducationService} from './education.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute,Router} from '@angular/router';
 
 @Component({
   selector: 'app-education',
   templateUrl: './education.component.html',
-  styleUrls: ['./education.component.css']
+  styleUrls: ['./education.component.css'],
 })
 export class EducationComponent implements OnInit {
-  educations: any;
-education: Education=new Education();
+  educations!: Array<Education>;
+  education!: Education;
 
-edit : boolean=true;
-add : boolean=true;
-username: string="";
+  username = localStorage.getItem('user');
 
-  constructor(private educationService: EducationService, private activeRoute: ActivatedRoute) { }
+  constructor(
+    private educationService: EducationService,
+    private activeRoute: ActivatedRoute,
+    private router: Router
+  ) {}
+
+  onAdd(): void {
+    console.log(this.username);
+    this.router.navigateByUrl(`education/${this.username}`);
+  }
+
+  routeToEdit(id: number): void {
+    console.log(id);
+    this.router.navigateByUrl(`education/${this.username}/edit/${id}`);
+  }
 
   ngOnInit(): void {
-    this.username = this.activeRoute.snapshot.params.username;
-    console.log(this.username);
-    this.educationService.setUrl('http://localhost:8080/education/' + this.username);
-    this.educationService.get().subscribe(
-      (data) => {
-        console.log(data);
-        this.educations = data;
-      });
-  }
-  updateEducation(){
-    
-    //console.log(this.signupForm.value);
-    //service update needed
-  }
+    this.username = localStorage.getItem('user');
 
-
+    if (this.username) {
+      this.educationService.getEducations(this.username).subscribe(
+        (data: Array<Education>) => {
+          console.log(data);
+          this.educations = data;
+        },
+        (error) => console.log(error)
+      );
+    }
+  }
 }

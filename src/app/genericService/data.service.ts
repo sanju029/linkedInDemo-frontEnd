@@ -1,19 +1,24 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
-import {catchError} from 'rxjs/operators';
-import {NotFoundError} from '../customerrors/not-found-error';
-import {BadRequest} from '../customerrors/bad-request';
-import {AppError} from '../customerrors/app-error';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { NotFoundError } from '../customerrors/not-found-error';
+import { BadRequest } from '../customerrors/bad-request';
+import { AppError } from '../customerrors/app-error';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DataService {
   private url: any;
 
-  constructor(private http: HttpClient) {
-  }
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    }),
+  };
+
+  constructor(private http: HttpClient) {}
 
   setUrl(url: string): void {
     this.url = url;
@@ -21,24 +26,28 @@ export class DataService {
   }
 
   get(): Observable<any> {
-    return this.http.get(this.url, {responseType: 'json'})
-      .pipe(catchError((err) => {
+    return this.http.get(this.url, this.httpOptions).pipe(
+      catchError((err) => {
         return this.handleError;
-      }));
+      })
+    );
   }
 
   create(resource: any): Observable<any> {
-    return this.http.post(this.url, resource )
-      .pipe(catchError(err => this.handleError(err)));
+    return this.http
+      .post(this.url, resource, this.httpOptions)
+      .pipe(catchError((err) => this.handleError(err)));
   }
 
   update(resource: any): Observable<any> {
-    return this.http.post(this.url, JSON.stringify(resource))
-      .pipe(catchError(err => this.handleError(err)));
+    return this.http
+      .post(this.url, resource, this.httpOptions)
+      .pipe(catchError((err) => this.handleError(err)));
   }
 
   delete(id: any): Observable<any> {
-    return this.http.delete(this.url + '/' + id)
+    return this.http
+      .delete(this.url + '/' + id, this.httpOptions)
       .pipe(catchError((err) => this.handleError(err)));
   }
 

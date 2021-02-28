@@ -1,19 +1,25 @@
-import { NgModule } from "@angular/core";
-import { ProfileComponent } from "./profile.component";
-//import { ProfilePageRoutingModule } from "./profile-page-routing.module";
-import { CommonModule } from "@angular/common";
-import { EducationComponent } from "../../education/education.component";
-import { ExperienceComponent } from "../../experience/experience.component";
-import { SkillsComponent } from "../../skills/skills.component";
+import { NgModule } from '@angular/core';
+import { ProfileComponent } from './profile.component';
+import { ProfileRoutingModule } from './profile-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { ExperienceModule } from 'src/app/experience/experience.module';
+import { EducationModule } from 'src/app/education/education.module';
+import { SkillsModule } from '../../skills/skills.module';
 
 @NgModule({
-    declarations: [
-        ProfileComponent,
-        EducationComponent,
-        ExperienceComponent,
-        SkillsComponent,
-    ],
-    imports: [ CommonModule],
-    exports: [ProfileComponent],
+  declarations: [ProfileComponent],
+  imports: [
+    ProfileRoutingModule,
+    FormsModule,
+    BrowserModule,
+    ReactiveFormsModule,
+    CommonModule,
+    ExperienceModule,
+    EducationModule,
+    SkillsModule
+  ],
+  exports: [ProfileComponent],
 })
-export class ProfilePageModule {}
+export class ProfileModule {}

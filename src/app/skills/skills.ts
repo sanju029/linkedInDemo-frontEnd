@@ -1,7 +1,9 @@
-export class Skills{
+import {User} from '../user'
+export interface Skills{
 
-    public technology : string ="";
-    public rating : string ="";
-    //id : string;
+    technology : string;
+    rating : string;
+    skillId : number;
+    user?: User;
     
 }

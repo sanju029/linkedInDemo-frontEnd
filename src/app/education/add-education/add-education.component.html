@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="glyphicon-experienceAdd">
+        <h2 class="name">Add Experience</h2>
+      </div>
+      <div class="dashboard">
+        <form
+          class="user-information .col-sm-4"
+          [formGroup]="addEducationForm"
+          (ngSubmit)="onsubmit()"
+        > 
+          <div class="element">
+            <label for="college" class="col-sm-4 col-form-label"
+              >College:</label
+            >
+            <div class="col-sm-8">
+              <input
+                id="college"
+                class="form-control"
+                type="text"
+                placeholder="Enter College"
+                formControlName="college"
+              />
+            </div>
+          </div>
+          <div class="element">
+            <label for="joiningYear" class="col-sm-4 col-form-label"
+              >Joining Year:</label
+            >
+            <div class="col-sm-8">
+              <input
+                id="joiningYear"
+                class="form-control"
+                type="email"
+                placeholder="Enter start year"
+                formControlName="joiningYear"
+              />
+            </div>
+          </div>
+          <div class="element">
+            <label for="endingYear" class="col-sm-4 col-form-label"
+              >End Year:</label
+            >
+            <div class="col-sm-8">
+              <input
+                id="endingYear"
+                class="form-control"
+                type="text"
+                placeholder="Enter end year"
+                formControlName="endingYear"
+              />
+            </div>
+          </div>
+          <div class="element">
+            <label for="course" class="col-sm-4 col-form-label">Course:</label>
+            <div class="col-sm-8">
+              <input
+                id="course"
+                class="form-control"
+                type="text"
+                placeholder="Enter course"
+                formControlName="course"
+              />
+            </div>
+          </div>
+          <div class="element">
+            <label for="grade" class="col-sm-4 col-form-label">Grade:</label>
+            <div class="col-sm-8">
+              <input
+                id="grade"
+                class="form-control"
+                type="text"
+                placeholder="Enter grade"
+                formControlName="grade"
+              />
+            </div>
+          </div>
+          <button class="btn btn-success" type="submit">Add</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

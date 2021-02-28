@@ -1,34 +1,48 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { User } from '../user';
+import { catchError, retry } from 'rxjs/operators';
+import { DataService } from '../genericService/data.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class RegisterService {
+export class RegisterService extends DataService {
+  // private baseUrl = 'http://localhost:8080/user';
 
-  private baseUrl = 'http://localhost:8080/user';
-
-  constructor(private http: HttpClient) { }
-
-  // getEmployee(id: number): Observable<any> {
-  //   return this.http.get(`${this.baseUrl}/${id}`);
-  // }
-
-  createUser(user: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/createUser`, user);
+  constructor(http: HttpClient) {
+    super(http);
   }
 
-  // updateEmployee(id: number, value: any): Observable<Object> {
-  //   return this.http.put(`${this.baseUrl}/${id}`, value);
+  // createUser(user: Object): Observable<any> {
+  //   return this.http.post<User>('http://localhost:8080/user/createUser',JSON.stringify(user),
+  //   {
+  //     headers: new HttpHeaders({'Content-Type': 'application/json'})
+  //   }
+  //   )
+
+  //   .pipe(
+  //     retry(1),
+  //     catchError(error=>this.errorHandling(error))
+  //   );
   // }
 
-  // deleteEmployee(id: number): Observable<any> {
-  //   return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
+  // errorHandling(error: any): Observable<never> {
+  //   let errorMessage = '';
+  //   if (error.error instanceof ErrorEvent) {
+  //     // Get client-side error
+  //     errorMessage = error.error.message;
+  //   } else {
+  //     // Get server-side error
+  //     errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+  //   }
+  //   console.log(errorMessage);
+  //   return throwError(errorMessage);
   // }
 
-  // getEmployeesList(): Observable<any> {
-  //   return this.http.get(`${this.baseUrl}`);
-  // }
+  setUrl(url: string): void {
+    console.log('in Url');
+    super.setUrl(url);
+  }
 }

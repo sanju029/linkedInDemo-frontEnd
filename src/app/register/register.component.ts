@@ -1,84 +1,68 @@
-import { Component, OnInit,ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RegisterService } from './register.service';
 import { User } from '../user';
 import { Router } from '@angular/router';
-import { FormsModule,NgForm} from '@angular/forms';
-
-
+import {
+  FormsModule,
+  NgForm,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  
-  user: User = new User();
+  user!: User;
   submitted = false;
 
-  @ViewChild('f', { static: false }) signupForm: NgForm | undefined ;
-  constructor(private registerService: RegisterService,
-    private router: Router) { }
-    temp: any;
-  ngOnInit(){
+  @ViewChild('f', { static: false }) signupForm: NgForm | undefined;
+  constructor(
+    private registerService: RegisterService,
+    private router: Router
+  ) {}
+  temp: any;
+
+  registerForm: FormGroup = new FormGroup({
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+    fullName: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
+    phoneNumber: new FormControl('', Validators.required),
+    address: new FormControl('', Validators.required),
+  });
+
+  ngOnInit(): void {
+    this.registerService.setUrl('http://localhost:8080/user/createUser');
   }
 
   newUser(): void {
     this.submitted = false;
-    this.user = new User();
   }
 
-  save() {
-    this.registerService
-    .createUser(this.user).subscribe(data => {
-      console.log(data)
-      this.gotoList();
-    }, 
-    error => console.log(error));
+  save(): void {
+    this.registerService.create(this.user).subscribe(
+      (data) => {
+        console.log(data);
+        this.gotoList();
+      },
+      (error) => console.log(error)
+    );
+    console.log(this.user);
   }
 
-  onSubmit() {
-    this.temp = this.signupForm?.value
-    console.log();
-    this.user.username=this.temp.username;
-    this.user.password=this.temp.password;
-    this.user.fullName=this.temp.fullName;
-    this.user.email=this.temp.email;
-    this.user.phoneNumber=this.temp.phoneNumber;
-    this.user.address=this.temp.address;
-    this.submitted = true;
-    this.save();    
+  onSubmit(): void {
+    this.registerService.create(this.registerForm.value).subscribe((data) => {
+      localStorage.setItem('user', this.registerForm.value.username);
+      this.router.navigateByUrl(`user/${this.registerForm.value.username}`);
+    });
   }
 
-  gotoList() {
+  gotoList(): void {
     this.router.navigate(['/users']);
   }
-  post(){
-    
-  }
-
+  post(): void {}
 }
-// import {Component, OnInit, ViewChild} from '@angular/core';
-// import {NgForm} from '@angular/forms';
-
-// @Component({
-//   selector: 'app-register',
-//   templateUrl: './register.component.html',
-//   styleUrls: ['./register.component.css']
-// })
-// export class RegisterComponent implements OnInit {
-
-//   @ViewChild('f', { static: false }) signupForm: NgForm | undefined ;
-//   constructor() { }
-//   ngOnInit(): void {
-//   }
-//   // tslint:disable-next-line:typedef
-//   onSubmit() {
-//     // @ts-ignore
-//     console.log(this.signupForm.value);
-//     // @ts-ignore
-//     this.signupForm.reset();
-//     }
-
-
-// }

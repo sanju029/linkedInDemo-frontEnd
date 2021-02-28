@@ -1,39 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { Experience } from './experience';
-import {ActivatedRoute} from '@angular/router';
-import { ExperienceService} from './experience.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ExperienceService } from './experience.service';
 
 @Component({
   selector: 'app-experience',
   templateUrl: './experience.component.html',
-  styleUrls: ['./experience.component.css']
+  styleUrls: ['./experience.component.css'],
 })
 export class ExperienceComponent implements OnInit {
+  experiences!: Array<Experience>;
+  experience!: Experience;
 
-  experiences: any;
-  experience: Experience=new Experience();
+  username = localStorage.getItem('user');
 
+  constructor(
+    private experienceService: ExperienceService,
+    private activeRoute: ActivatedRoute,
+    private router: Router
+  ) {}
 
-  edit : boolean=true;
-  add : boolean=true;
-  username : string="";
+  onAdd(): void {
+    console.log(this.username);
+    this.router.navigateByUrl(`experience/${this.username}`);
+  }
 
-  constructor(private experienceService: ExperienceService, private activeRoute: ActivatedRoute) { }
+  routeToEdit(id: number): void {
+    console.log(id);
+    this.router.navigateByUrl(`experience/${this.username}/edit/${id}`);
+  }
 
   ngOnInit(): void {
-    this.username = this.activeRoute.snapshot.params.username;
-    this.experienceService.setUrl('http://localhost:8080/education/' + this.username);
-    this.experienceService.get().subscribe(
-      (data) => {
-        console.log(data);
-        this.experiences = data;
-      });
+    this.username = localStorage.getItem('user');
 
-    
+    if (this.username) {
+      this.experienceService.getExperiences(this.username).subscribe(
+        (data: Array<Experience>) => {
+          console.log(data);
+          this.experiences = data;
+        },
+        (error) => console.log(error)
+      );
+    }
   }
-
-  updateExperience(){
-    
-  }
-
 }

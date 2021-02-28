@@ -1,34 +1,53 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-
+import { Skills } from './skills';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class ServerService {
-
-  private baseUrl = 'http://localhost:8080/skill';
-
-  constructor(private http: HttpClient) { }
-
-  getEmployee(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${id}`);
+export class SkillService {
+  addSkill(skillsForm: FormGroup): Observable<any> {
+    return this.http.post<Skills>(
+      'http://localhost:8080/createSkill',
+      JSON.stringify(skillsForm.value),
+      {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      }
+    );
   }
 
-//   createUser(user: Object): Observable<Object> {
-//     return this.http.post(`${this.baseUrl}/createUser`, user);
-//   }
+  getSkills(username: string): Observable<any> {
+    return this.http.get<Array<Skills>>(
+      `http://localhost:8080/skill/${username}`,
+      {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      }
+    );
+  }
 
-  // updateEmployee(id: number, value: any): Observable<Object> {
-  //   return this.http.put(`${this.baseUrl}/${id}`, value);
-  // }
+  getSkill(id: string): Observable<any> {
+    return this.http.get<Skills>(`http://localhost:8080/skillById/${id}`, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    });
+  }
 
-  // deleteEmployee(id: number): Observable<any> {
-  //   return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
-  // }
+  updateSkill(skillsForm: FormGroup, id: string): Observable<any> {
+    return this.http.put<Skills>(
+      `http://localhost:8080/skill/${id}`,
+      JSON.stringify(skillsForm.value),
+      {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      }
+    );
+  }
 
-  // getEmployeesList(): Observable<any> {
-  //   return this.http.get(`${this.baseUrl}`);
-  // }
+  deleteSkill(id: string): Observable<any> {
+    return this.http.delete<any>(`http://localhost:8080/skill/${id}`, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    });
+  }
+
+  constructor(private http: HttpClient) {}
 }

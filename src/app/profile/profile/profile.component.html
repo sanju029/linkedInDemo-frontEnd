@@ -1,3 +1,52 @@
-<!-- <app-education></app-education>
+<section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
+  <div class="container">
+    <div class="jumbotron">
+      <div class="my-auto">
+        <h1 class="mb-0">
+          {{ user.fullName }}
+        </h1>
+        <!-- <h1 class="mb-0">
+          <span class="text-primary">{{ user.username }}</span>
+        </h1> -->
+        <h3 class="mb-5">Software Developer</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr />
+
+<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="experience">
+  <div
+    class="card"
+    style="width: 113rem; top: 50%; left: 50%; transform: translate(-50%, -10%)"
+  >
+    <div class="card-header">
+      <h3 class="mb-5">
+        Personal Details
+
+        <button type="button" class="btn btn-primary float-right">
+          <span class="glyphicon glyphicon-edit"></span> Edit
+        </button>
+      </h3>
+    </div>
+    <div class="card-body">
+      <div class="card-title h3">{{ user.email }}</div>
+      <br />
+      <div class="card-text my-auto">
+        <div class="resume-content mr-auto h4">
+          <p>{{ user.phoneNumber }}</p>
+        </div>
+        <br />
+        <div class="resume-content mr-auto h4">
+          <span>{{ user.address }}</span>
+        </div>
+      </div>
+      <span>&nbsp;</span>
+    </div>
+  </div>
+</section>
+
 <app-experience></app-experience>
-<app-skills></app-skills> -->
+<app-education></app-education>
+<app-skills></app-skills>

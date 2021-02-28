@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="glyphicon-educationEdit">
+        <h2 class="name">Edit Skill</h2>
+      </div>
+      <div class="dashboard">
+        <form
+          class="user-information .col-sm-"
+          [formGroup]="editSkillForm"
+          (ngSubmit)="onSubmit()"
+        >
+          <div class="element">
+            <label for="technology" class="col-sm-4 col-form-label"
+              >Technology:</label
+            >
+            <div class="col-sm-8">
+              <input
+                id="technology"
+                class="form-control"
+                type="text"
+                placeholder="Enter Technology"
+                formControlName="technology"
+              />
+            </div>
+          </div>
+          <div class="element">
+            <label for="rating" class="col-sm-4 col-form-label">Rating:</label>
+            <div class="col-sm-8">
+              <input
+                id="rating"
+                class="form-control"
+                type="text"
+                placeholder="Enter rating"
+                formControlName="rating"
+              />
+            </div>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-success" type="submit">Update</button>
+            <button class="btn btn-info" type="button" (click)="onDelete()">
+              Delete
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

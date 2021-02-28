@@ -5,8 +5,6 @@ import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser'
 import { CommonModule } from '@angular/common';
 
-//import { RegisterComponent } from '../register/register.component';
-//import { EducationComponent } from '../education/education.component';
 
 @NgModule({
     declarations: [LoginComponent],
